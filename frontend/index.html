@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Project Management</title>
+</head>
+<body>
+    <h1>Project Tasks</h1>
+    <button onclick="loadTasks()">Load Tasks</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        function loadTasks() {
+            fetch("http://127.0.0.1:5000/tasks")
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById("taskList");
+                list.innerHTML = "";
+                data.forEach(t => {
+                    const li = document.createElement("li");
+                    li.innerText = t.name + " - " + t.status;
+                    list.appendChild(li);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
